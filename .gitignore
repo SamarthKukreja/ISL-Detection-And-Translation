@@ -1,0 +1,32 @@
+# Ignore IDE and environment files
+.idea/
+__pycache__/
+
+# Ignore dataset directories
+/Mp_Data*/
+/data/
+/augmented_data*/
+
+# Ignore model-related files and directories
+/model/
+/models/
+model.p
+model1.p
+create_dataset.py
+train_classifier.py
+app1.py
+
+# Ignore Jupyter notebooks
+*.ipynb
+
+# Ignore test scripts
+test_model.py
+test.ipynb
+data.ipynb
+app1.ipynb
+
+# Ignore resized data
+/resized_hands_data/
+
+# Ignore sound files
+/sounds/
