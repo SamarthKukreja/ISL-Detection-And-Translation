@@ -11,7 +11,7 @@ API_URL = "http://16.170.236.135:8000/predict/"  # Change this after deployment
 
 st.set_page_config(page_title="Sign Language Detection", layout="centered")
 
-st.title("🖐️ Sign Language Detection")
+st.title("Indian Sign Language Detection App")
 st.markdown("Upload an image or start real-time detection!")
 
 # File Upload Section
