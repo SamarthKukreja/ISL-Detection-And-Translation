@@ -12,7 +12,7 @@ API_URL = "http://16.170.236.135:8000/predict/"  # Change this after deployment
 st.set_page_config(page_title="Sign Language Detection", layout="centered")
 
 st.title("Indian Sign Language Detection App")
-st.markdown("Upload an image or start real-time detection!")
+st.markdown("Upload an image")
 
 # File Upload Section
 uploaded_file = st.file_uploader("Choose an image...", type=["jpg", "png", "jpeg"])
