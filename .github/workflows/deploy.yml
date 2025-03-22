@@ -22,22 +22,29 @@ jobs:
       run: |
         ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             cd ~/isl_backend
-            if [ -d ".git" ]; then
-                git pull origin master
+            if [ ! -d ".git" ]; then
+                git init
+                git remote add origin https://github.com/SamarthKukreja/ISL-Detection-And-Translation.git
+                git fetch origin
+                git reset --hard origin/master
             else
-                git clone https://github.com/SamarthKukreja/ISL-Detection-And-Translation.git .
+                git pull origin master
             fi
             source venv/bin/activate
             pip install -r requirements.txt
             nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload > backend.log 2>&1 &
 
             cd ~/isl_frontend
-            if [ -d ".git" ]; then
-                git pull origin master
+            if [ ! -d ".git" ]; then
+                git init
+                git remote add origin https://github.com/SamarthKukreja/ISL-Detection-And-Translation.git
+                git fetch origin
+                git reset --hard origin/master
             else
-                git clone https://github.com/SamarthKukreja/ISL-Detection-And-Translation.git .
+                git pull origin master
             fi
             source ~/isl_backend/venv/bin/activate
             pip install -r requirements.txt
             nohup streamlit run app.py --server.port 8501 --server.address 0.0.0.0 > frontend.log 2>&1 &
         EOF
+
