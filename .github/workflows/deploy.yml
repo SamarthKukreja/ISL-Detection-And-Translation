@@ -34,7 +34,7 @@ jobs:
             pip install -r requirements.txt
             nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload > backend.log 2>&1 &
 
-            cd ~/isl_frontend
+            cd ~/isl_frontend/isl_frontend
             if [ ! -d ".git" ]; then
                 git init
                 git remote add origin https://github.com/SamarthKukreja/ISL-Detection-And-Translation.git
