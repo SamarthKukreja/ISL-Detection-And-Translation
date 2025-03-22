@@ -29,7 +29,7 @@ jobs:
 
           cd ~/isl_frontend
           git pull origin master
-          source venv/bin/activate
+          source ~/isl_backend/venv/bin/activate 
           pip install -r requirements.txt
           nohup streamlit run app.py --server.port 8501 --server.address 0.0.0.0 > frontend.log 2>&1 &
         EOF
