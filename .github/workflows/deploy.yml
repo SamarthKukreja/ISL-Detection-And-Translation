@@ -21,7 +21,7 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd isl_backend
+          cd ~/isl_backend
           git pull origin master
           source venv/bin/activate
           pip install -r requirements.txt
