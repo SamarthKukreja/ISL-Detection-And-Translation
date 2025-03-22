@@ -8,26 +8,14 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v4
 
-    - name: Debug SSH Connection
-      run: ssh -v -o StrictHostKeyChecking=no -i ${{ secrets.EC2_SSH_KEY }} ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}
+      - name: Create SSH Private Key File
+        run: |
+          echo "${{ secrets.EC2_SSH_KEY }}" > ec2_key.pem
+          chmod 600 ec2_key.pem  # Set the correct file permissions
 
-    - name: Deploy to EC2
-      run: |
-        ssh -o StrictHostKeyChecking=no -i c:\Users\Samarth\Downloads\isl_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-          cd isl_backend
-          git pull origin master
-          source venv/bin/activate
-          pip install -r requirements.txt
-          nohup uvicorn main:app --host 0.0.0.0 --port 8000 --reload > backend.log 2>&1 &
-
-          cd ~/isl_frontend
-          git pull origin master
-          source venv/bin/activate
-          pip install -r requirements.txt
-          nohup streamlit run app.py --server.port 8501 --server.address 0.0.0.0 > frontend.log 2>&1 &
-        EOF
+      - name: Connect to EC2 via SSH
+        run: ssh -o StrictHostKeyChecking=no -i ec2_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}
