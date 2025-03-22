@@ -21,7 +21,7 @@ jobs:
     - name: Deploy to EC2
       run: |
         ssh -o StrictHostKeyChecking=no -i private_key.pem ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
-            cd ~/isl_backend
+            cd ~/isl_backend/isl_backend
             if [ ! -d ".git" ]; then
                 git init
                 git remote add origin https://github.com/SamarthKukreja/ISL-Detection-And-Translation.git
